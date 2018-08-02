@@ -41,17 +41,16 @@ public class MainController {
 		return "login";
 	}
 
-	@GetMapping("/createaccount")
-	public String studentform(Model model) {
+	@GetMapping("/register")
+	public String register(Model model) {
 		model.addAttribute("apgUser", new ApgUser());
-
-		return "createaccount";
+		return "register";
 	}
 
-	@PostMapping("/createaccount")
-	public String displayform(@Valid @ModelAttribute("apgUser") ApgUser apgUser, BindingResult result, Model model,@RequestParam("file")MultipartFile file) {
+	@PostMapping("/register")
+	public String displayform(@Valid@ModelAttribute("apgUser")ApgUser apgUser, BindingResult result, Model model,@RequestParam("file")MultipartFile file) {
 		if (result.hasErrors()||file.isEmpty()) {
-			return "createaccount";
+			return "register";
 		} else {
 			try {
 				Map uploadResult =  cloudc.upload(file.getBytes(),
@@ -62,7 +61,7 @@ public class MainController {
 					userRepo.save(apgUser);
 			} catch (IOException e){
 				e.printStackTrace();
-				return "redirect:/createaccount";
+				return "redirect:/register";
 			}
 			return "login";
 		}
