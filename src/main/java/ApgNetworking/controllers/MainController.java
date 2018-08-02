@@ -8,6 +8,7 @@ import ApgNetworking.repositories.UserRepository;
 import ApgNetworking.services.UserService;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.naming.AuthenticationException;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Map;
@@ -44,6 +46,7 @@ public class MainController {
 	@GetMapping("/register")
 	public String register(Model model) {
 		model.addAttribute("apgUser", new ApgUser());
+		model.addAttribute("actCourses", courserepo.findAll());
 		return "register";
 	}
 
@@ -66,24 +69,33 @@ public class MainController {
 			return "login";
 		}
 	}
-
+	@RequestMapping ("/profilepage")
+	public String profilePage(Authentication authentication, Model model){
+		model.addAttribute("currUser",userRepo.findByUsername(authentication.getName()));
+		return "profilepage";
+	}
 	//What handles the adding a course
-	@GetMapping("/addCourse")
+	@GetMapping("/addcourse")
 	public String addcourse(Model model) {
 		model.addAttribute("course", new Course());
-		return "addCourse";
+		return "addcourse";
 	}
 
-	@PostMapping("/addCourse")
+	@PostMapping("/addcourse")
 	public String showCourse(@Valid @ModelAttribute("course") Course course, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return "addCourse";
+			return "addcourse";
 		} else {
 
 			courserepo.save(course);
 			model.addAttribute("allCourses", courserepo.findAll());
-			return "courseList";
+			return "roster";
 		}
 
+	}
+	@RequestMapping("/roster")
+		public String roster(Model model){
+		model.addAttribute("allCourses", courserepo.findAll());
+		return "roster";
 	}
 }
