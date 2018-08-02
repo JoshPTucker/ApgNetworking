@@ -18,7 +18,10 @@
 <body>
 <div class="container">
     <form method="post" action="#" th:action="@{/addcourse}" th:object="${course}">
-
+        <label>Course Name</label>
+        <input class="form-control" type="text" th:field="*{name}"/>
+        <label>Semester </label>
+        <input class="form-control" type="text" th:field="*{semester}"/>
         <button type="submit" value="submit" class="btn btn-outline-dark">submit</button>
         <button type="reset" class="btn btn-outline-dark">Reset</button>
     </form>

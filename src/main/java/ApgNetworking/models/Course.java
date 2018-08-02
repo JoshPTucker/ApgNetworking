@@ -16,6 +16,7 @@ public class Course {
 	private String crn;
 	@ManyToMany
 	private Collection<ApgUser> users;
+
 	public long getId() {
 		return id;
 	}

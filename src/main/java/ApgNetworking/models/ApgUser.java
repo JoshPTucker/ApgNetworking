@@ -31,6 +31,16 @@ public class ApgUser {
 	private Collection<Role> roles;
 	@ManyToMany(mappedBy = "users")
 	private Collection<Course> courses;
+
+	public ApgUser(String email, String firstName, String lastName, String username, String password) {
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+
+	}
+
 	public long getId() {
 		return id;
 	}

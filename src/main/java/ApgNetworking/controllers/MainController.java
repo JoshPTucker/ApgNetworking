@@ -61,6 +61,7 @@ public class MainController {
 				apgUser.setPicUrl(uploadResult.get("url").toString());
 				String thePassword = apgUser.getPassword();
 				apgUser.setPassword(passwordEncoder.encode(thePassword));
+				apgUser.setEnabled(true);
 					userRepo.save(apgUser);
 			} catch (IOException e){
 				e.printStackTrace();
