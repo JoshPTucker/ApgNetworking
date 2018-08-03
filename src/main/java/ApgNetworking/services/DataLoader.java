@@ -31,12 +31,23 @@ public class DataLoader implements CommandLineRunner {
 
         //Trys to find a role
         Role adminRole = roleRepository.findByRole("ADMIN");
-        // Role userRole = roleRepository.findByRole("USER");
-        //If role does not exist then the role is added
-//        if (adminRole == null) {
-//            roleRepository.save(new Role("USER"));
-//            roleRepository.save(new Role("ADMIN"));
-//        }
+        Role userRole = roleRepository.findByRole("USER");
+        Role teacherRole=roleRepository.findByRole("TEACHER");
+        Role studentRole=roleRepository.findByRole("STUDENT");
+       // If role does not exist then the role is added
+        if (adminRole == null) {
+
+            roleRepository.save(new Role("ADMIN"));
+        }
+        if(userRole==null){
+         roleRepository.save(new Role("USER"));
+        }
+        if (teacherRole==null){
+            roleRepository.save(new Role("TEACHER"));
+        }
+        if(studentRole==null){
+            roleRepository.save(new Role("STUDENT"));
+        }
         ApgUser user = new ApgUser("admin@secure.com","al","admin","admin",passwordEncoder.encode("password"));
         user.setRoles(Arrays.asList(adminRole));
         if(userRepository.findByUsername("admin")==null) {

@@ -4,6 +4,7 @@ import ApgNetworking.configurations.CloudinaryConfig;
 import ApgNetworking.models.ApgUser;
 import ApgNetworking.models.Course;
 import ApgNetworking.repositories.CourseRepository;
+import ApgNetworking.repositories.RoleRepository;
 import ApgNetworking.repositories.UserRepository;
 import ApgNetworking.services.UserService;
 import com.cloudinary.utils.ObjectUtils;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.naming.AuthenticationException;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 
 @Controller
@@ -29,6 +31,8 @@ public class MainController {
 	private CourseRepository courserepo;
 	@Autowired
 	private UserRepository  userRepo;
+	@Autowired
+	private RoleRepository roleRepo;
 	@Autowired
 	CloudinaryConfig cloudc;
 	@Autowired
@@ -62,6 +66,7 @@ public class MainController {
 				String thePassword = apgUser.getPassword();
 				apgUser.setPassword(passwordEncoder.encode(thePassword));
 				apgUser.setEnabled(true);
+				apgUser.setRoles(Arrays.asList(roleRepo.findByRole("STUDENT")));
 					userRepo.save(apgUser);
 			} catch (IOException e){
 				e.printStackTrace();

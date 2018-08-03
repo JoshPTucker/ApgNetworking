@@ -31,7 +31,9 @@ public class ApgUser {
 	private Collection<Role> roles;
 	@ManyToMany(mappedBy = "users")
 	private Collection<Course> courses;
+	public ApgUser(){
 
+	}
 	public ApgUser(String email, String firstName, String lastName, String username, String password) {
 		this.email = email;
 		this.firstName = firstName;
@@ -114,5 +116,9 @@ public class ApgUser {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	public void addRole(Role role)
+	{
+		this.roles.add(role);
 	}
 }

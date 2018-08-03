@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http
                 .authorizeRequests()
                 .antMatchers("/", "/index" ,"/register").permitAll()
-                //  .antMatchers("/addCourse","/courseList","").access("hasAuthority('ADMIN')")
+                .antMatchers("/addcourse").access("hasAuthority('ADMIN')")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
