@@ -16,11 +16,24 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-    <div th:each="actCourse:${allCourses}">
-        <p>[[${actCourse.name}]] [[${actCourse.semester}</p>
-        <div th:each="student:${actCourse.users}">
-            <p>[[${student.firstName}]] [[${student.lastname}]]</p>
-            <p>[[${student.email}]] [[${stduent.linkedIn}]] [[${student.github}]]</p>
+<div class="container">
+    <div class="row">
+        <div class="border border-dark p-2" th:each="actCourse:${allCourses}">
+            <h3>[[${actCourse.name}]] [[${actCourse.semester}]]</h3>
+            <div th:each="student:${actCourse.users}">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" th:src="${student.picUrl}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">[[${student.username}]]</h5>
+                        <p class="card-text">[[${student.firstName}]] [[${student.lastName}]]</p>
+                        <p>Email : [[${student.email}]]</p>
+                        <a th:href="@{${student.linkedIn}}" class="btn btn-primary">LinkedIn</a>
+                        <a th:href="@{student.github}" class="btn btn-primary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 </body>
 </html>

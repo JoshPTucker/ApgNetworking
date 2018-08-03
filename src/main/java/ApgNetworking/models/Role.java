@@ -16,17 +16,13 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String role;
-
 	@ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
 	private Collection<ApgUser> users;
-
 	public Role(String role) {
 		this.role = role;
 	}
-
 	public Role() {
 	}
-
 	public long getId() {
 		return id;
 	}
