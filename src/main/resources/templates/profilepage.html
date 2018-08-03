@@ -20,8 +20,8 @@
     <img th:src="${currUser.picUrl}" />
     <p>Hello user designation: [[${currUser.firstName}]]</p>
     <p>Email: [[${currUser.email}]]</p>
-    <p>LinkedIn: <a th:href="${currUser.linkedIn}">[[${currUser.linkedIn}]]</a></p>
-    <p>Git hub<a th:href="@{currUser.github}"> [[${currUser.github}]]</a></p>
+    <p>LinkedIn: <a th:href="@{${currUser.linkedIn}}" target="_blank">[[${currUser.linkedIn}]]</a></p>
+    <p>Git hub<a th:href="@{${currUser.github}}" target="_blank"> [[${currUser.github}]]</a></p>
     <p>Classes That you have taken</p>
     <div th:each="acourse:${currUser.courses}">
         <p>Course: [[${acourse.name}]] Semester: [[${acourse.semester}]]</p>

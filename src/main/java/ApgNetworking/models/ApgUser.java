@@ -104,6 +104,7 @@ public class ApgUser {
 		this.linkedIn = linkedIn;
 	}
 	public String getGithub() {
+		//if left of github is not https then append https or http
 		return github;
 	}
 	public void setGithub(String github) {
