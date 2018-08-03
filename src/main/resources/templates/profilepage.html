@@ -23,8 +23,8 @@
     <p>LinkedIn: <a th:href="${currUser.linkedIn}">[[${currUser.linkedIn}]]</a></p>
     <p>Git hub<a th:href="${currUser.github}"> [[${currUser.github}]]</a></p>
     <p>Classes That you have taken</p>
-    <div th:each="course:${currUser.courses}">
-        <p>Course: [[${course.name} Semester: [[${course.semester}]]</p>
+    <div th:each="acourse:${currUser.courses}">
+        <p>Course: [[${acourse.name}]] Semester: [[${acourse.semester}]]</p>
     </div>
 </div>
 

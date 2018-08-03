@@ -49,7 +49,7 @@ public class DataLoader implements CommandLineRunner {
             roleRepository.save(new Role("STUDENT"));
         }
         ApgUser user = new ApgUser("admin@secure.com","al","admin","admin",passwordEncoder.encode("password"));
-        user.setRoles(Arrays.asList(adminRole));
+        user.setRoles(Arrays.asList(roleRepository.findByRole("ADMIN")));
         if(userRepository.findByUsername("admin")==null) {
             userRepository.save(user);
         }

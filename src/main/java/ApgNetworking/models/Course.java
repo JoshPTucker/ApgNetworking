@@ -14,9 +14,9 @@ public class Course {
 	private String semester;
 	private boolean active;
 	private String crn;
-	@ManyToMany
-	private Collection<ApgUser> users;
 
+	@ManyToMany(mappedBy = "courses")
+	private Collection<ApgUser> users;
 	public long getId() {
 		return id;
 	}

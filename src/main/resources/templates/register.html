@@ -36,10 +36,10 @@
         <input type="file"  id="file" name="file"  />
         <label> Select courses that you've taken, you can add more later</label>
         <select class="custom-select" th:field="*{courses}" multiple>
-            <option th:each="course:${actCourses}" th:value="${course.id}"
-                    th:name="${course.name}">
-                <p>Course Name: [[${course.name}]], Course Number:
-                    [[${course.semester}]]</p>
+            <option th:each="scourse:${actCourses}" th:value="${scourse.id}"
+                    th:name="${scourse.name}">
+                <p>Course Name: [[${scourse.name}]], Course Semester:
+                    [[${scourse.semester}]]</p>
             </option>
         </select>
         <button type="submit" value="submit" class="btn btn-outline-dark">submit</button>

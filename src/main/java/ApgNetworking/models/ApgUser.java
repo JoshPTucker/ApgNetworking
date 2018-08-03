@@ -29,7 +29,7 @@ public class ApgUser {
 	@JoinTable(joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Collection<Role> roles;
-	@ManyToMany(mappedBy = "users")
+	@ManyToMany()
 	private Collection<Course> courses;
 	public ApgUser(){
 

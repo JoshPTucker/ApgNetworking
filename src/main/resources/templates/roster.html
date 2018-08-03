@@ -16,6 +16,11 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-
+    <div th:each="actCourse:${allCourses}">
+        <p>[[${actCourse.name}]] [[${actCourse.semester}</p>
+        <div th:each="student:${actCourse.users}">
+            <p>[[${student.firstName}]] [[${student.lastname}]]</p>
+            <p>[[${student.email}]] [[${stduent.linkedIn}]] [[${student.github}]]</p>
+    </div>
 </body>
 </html>
