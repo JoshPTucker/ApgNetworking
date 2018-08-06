@@ -60,6 +60,7 @@ public class MainController {
 	@PostMapping("/register")
 	public String displayform(@Valid@ModelAttribute("apgUser")ApgUser apgUser, BindingResult result, Model model,@RequestParam("file")MultipartFile file) {
 		if (result.hasErrors()||file.isEmpty()) {
+			model.addAttribute("actCourses", courserepo.findAll());
 			return "register";
 		} else {
 			try {
@@ -79,6 +80,7 @@ public class MainController {
 					userRepo.save(apgUser);
 			} catch (IOException e){
 				e.printStackTrace();
+				model.addAttribute("actCourses", courserepo.findAll());
 				return "redirect:/register";
 			}
 			return "login";
