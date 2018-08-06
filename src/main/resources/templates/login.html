@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>Login</title>
     <th:block th:insert="base :: header"></th:block>
 </head>
 <body>
-
+<div th:replace="base :: navlinks"></div>
 <div class="container">
-    <div th:replace="base :: navlinks"></div>
     <div th:if="${param.error}" class="text-danger border border-danger rounded">
         Invalid username and password.
     </div>
@@ -21,8 +20,7 @@
         <div><button type="submit" value="Sign In" class="btn btn-outline-dark">Sign In</button></div>
         <button type="reset" class="btn btn-outline-dark">Reset</button>
     </form>
-    <div th:replace="base ::footer"></div>
 </div>
-
+<div th:replace="base ::footer"></div>
 </body>
 </html>

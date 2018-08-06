@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>News Feed</title>
@@ -7,11 +7,12 @@
 
 </head>
 <body>
-    <div class="container">
-        <div th:replace="base :: navlinks"></div>
-        <div class="row">
-            <div class="border border-dark p-2" th:each="post:${posts}">
-                <div class="card" style="width: 18rem;">
+<div th:replace="base :: navlinks"></div>
+<div class="container">
+    <div class="row">
+    <div class="border border-dark p-2" th:each="post:${posts}">
+            <div class="col-md-4">
+                <div class="card" style="width: 12rem;">
                     <img class="card-img-top" th:src="${post.apguser.picUrl}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">[[${post.apguser.username}]]</h5>
@@ -19,8 +20,11 @@
                     </div>
                 </div>
             </div>
+
         </div>
-        <div th:replace="base ::footer"></div>
     </div>
+
+</div>
+<div th:replace="base ::footer"></div>
 </body>
 </html>

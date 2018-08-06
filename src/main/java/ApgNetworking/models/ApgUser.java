@@ -3,15 +3,21 @@ package ApgNetworking.models;
 import java.util.Collection;
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 @Entity
 public class ApgUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	@Email
 	private String email;
+	@Size(min=1, max=20)
 	private String firstName;
+	@Size(min=1, max=20)
 	private String lastName;
+	@Size(min=1, max=20)
 	private String username;
 	private String password;
 	private String picUrl;
@@ -22,6 +28,7 @@ public class ApgUser {
 	@JoinTable(joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Collection<Role> roles;
+	@Size(min=1, max=20)
 	@ManyToMany()
 	private Collection<Course> courses;
 

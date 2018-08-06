@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,19 +9,20 @@
 
 </head>
 <body>
-
+<div th:replace="base :: navlinks"></div>
 <div class="container">
-    <div th:replace="base :: navlinks"></div>
+
     <form method="post" action="#" th:action="@{/makepost}" th:object="${post}">
         <label>Link</label>
         <input class="form-control" type="text" th:field="*{link}"/>
+        <span class="text-danger border border-danger rounded" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></span>
         <label>Content</label>
         <textarea class="form-control"  th:field="*{content}"></textarea>
+        <span class="text-danger border border-danger rounded" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
         <button type="submit" value="submit" class="btn btn-outline-dark">submit</button>
         <button type="reset" class="btn btn-outline-dark">Reset</button>
     </form>
-    <div th:replace="base ::footer"></div>
 </div>
-
+<div th:replace="base ::footer"></div>
 </body>
 </html>

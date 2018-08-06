@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="ISO-8859-1"/>
 <title>Index</title>
     <th:block th:insert="base :: header"></th:block>
 </head>
 <body>
-
+<div th:replace="base :: navlinks"></div>
 <div class="container">
-    <div th:replace="base :: navlinks"></div>
     <h1>Welcome to the America's Promise Grant Networking Site </h1>
     <h3>This site allows you to connect with students who have taken courses here</h3>
-    <div th:replace="base ::footer"></div>
 </div>
-
-
+<div th:replace="base ::footer"></div>
 </body>
 </html>

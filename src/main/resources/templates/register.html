@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>Register</title>
@@ -12,21 +12,27 @@
     <form method="post" action="#" th:action="@{/register}" th:object="${apgUser}" enctype="multipart/form-data">
         <label>Email</label>
         <input class="form-control" type="text" th:field="*{email}"/>
+        <span class="text-danger border border-danger rounded" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
         <label >First Name</label>
         <input class="form-control" type="text" th:field="*{firstName}"/>
+        <span class="text-danger border border-danger rounded" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
         <label>Last Name</label>
         <input class="form-control" type="text" th:field="*{lastName}"/>
+        <span class="text-danger border border-danger rounded" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
         <label>User Name</label>
         <input class="form-control" type="text" th:field="*{username}"/>
+        <span class="text-danger border border-danger rounded" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
         <label>Password</label>
-        <input class="form-control" type="text" th:field="*{password}"/>
+        <input class="form-control" type="password" th:field="*{password}"/>
+        <span class="text-danger border border-danger rounded" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
         <label> LinkedIn Url</label>
         <input class="form-control" type="text" th:field="*{linkedIn}"/>
         <label>Github Url</label>
         <input class="form-control" type="text" th:field="*{github}"/>
-        <label>Upload a profile picture</label>
+        <label>Upload a profile picture(required)</label>
         <input type="file"  id="file" name="file"  />
-        <label> Select courses that you've taken, you can add more later</label>
+        <label> Select courses that you've taken</label>
+        <span class="text-danger border border-danger rounded" th:if="${#fields.hasErrors('courses')}" th:errors="*{courses}"></span>
         <select class="custom-select" th:field="*{courses}" multiple>
             <option th:each="scourse:${actCourses}" th:value="${scourse.id}"
                     th:name="${scourse.name}">

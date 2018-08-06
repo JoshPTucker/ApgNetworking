@@ -18,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.naming.AuthenticationException;
 import javax.validation.Valid;
 import java.io.IOException;
@@ -71,6 +70,12 @@ public class MainController {
 				apgUser.setPassword(passwordEncoder.encode(thePassword));
 				apgUser.setEnabled(true);
 				apgUser.setRoles(Arrays.asList(roleRepo.findByRole("STUDENT")));
+				if(!apgUser.getLinkedIn().startsWith("https://")){
+					apgUser.setLinkedIn("https://"+apgUser.getLinkedIn());
+				}
+				if(!apgUser.getGithub().startsWith("https://")){
+					apgUser.setGithub("https://"+apgUser.getGithub());
+				}
 					userRepo.save(apgUser);
 			} catch (IOException e){
 				e.printStackTrace();
@@ -119,6 +124,9 @@ public class MainController {
 			return "makepost";
 		} else {
 			post.setApguser(userRepo.findByUsername(authentication.getName()));
+			if(!post.getLink().startsWith("https://")){
+				post.setLink("https://"+post.getLink());
+			}
 			postRepository.save(post);
 			model.addAttribute("posts", postRepository.findAll());
 			return "newsfeed";

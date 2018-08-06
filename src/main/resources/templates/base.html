@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head th:fragment="header">
     <meta charset="UTF-8" />
     <title>Title</title>
@@ -17,7 +17,7 @@
 </head>
 <body>
 <div th:fragment="navlinks" >
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Apg Networking</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,28 +27,34 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/roster">Roster</a>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/roster" >Roster</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/makepost">Post</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/newsfeed">Feed</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/profilepage">Profile Page</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="isAnonymous()">
                     <a class="nav-link" href="/login">Login</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/logout">Log Out</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="isAnonymous()">
                     <a class="nav-link" href="/register">Register</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasAuthority('ADMIN')" >
+                    <a class="nav-link" href="/addcourse">Add Course</a>
                 </li>
             </ul>
         </div>
     </nav>
 </div>
-<div th:fragment="footer" class="fixed-bottom">&copy; copyright 2018</div>
+<footer th:fragment="footer" class="footer fixed-bottom justify-content-center"><span class="text-muted">ApgNetworking &copy;copyright 2018</span></footer>
 </body>
 </html>

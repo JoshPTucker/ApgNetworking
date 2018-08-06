@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>Profile Page</title>
     <th:block th:insert="base :: header"></th:block>
 </head>
 <body>
+<div th:replace="base :: navlinks"></div>
 <div class="container">
-    <div th:replace="base :: navlinks"></div>
     <img th:src="${currUser.picUrl}" />
     <p>Hello user designation: [[${currUser.firstName}]]</p>
     <p>Email: [[${currUser.email}]]</p>
@@ -17,8 +17,7 @@
     <div th:each="acourse:${currUser.courses}">
         <p>Course: [[${acourse.name}]] Semester: [[${acourse.semester}]]</p>
     </div>
-    <div th:replace="base ::footer"></div>
 </div>
-
+<div th:replace="base ::footer"></div>
 </body>
 </html>

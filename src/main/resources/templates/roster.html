@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Roster</title>
     <th:block th:insert="base :: header"></th:block>
 </head>
 <body>
-
+<div th:replace="base :: navlinks"></div>
 <div class="container">
-    <div th:replace="base :: navlinks"></div>
+
 
     <div class=" border border-dark p-2" th:each="actCourse:${allCourses}">
         <div class="row">
-            <div class="col-md-4">
-                <h3>[[${actCourse.name}]] [[${actCourse.semester}]]</h3>
-                <div th:each="student:${actCourse.users}">
+            <h3>[[${actCourse.name}]] [[${actCourse.semester}]]</h3>
+                <div class="col-md-4" th:each="student:${actCourse.users}">
                     <div class="card" style="width: 12rem;">
                         <img class="card-img-top" th:src="${student.picUrl}" width="100px"
                              height="100px" alt="Card image cap">
@@ -27,11 +26,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
+
         </div>
     </div>
-    <div th:replace="base ::footer"></div>
-</div>
 
+</div>
+<div th:replace="base ::footer"></div>
 </body>
 </html>

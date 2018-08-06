@@ -4,15 +4,19 @@ import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Course {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	@Size(min=1, max=20)
 	private String name;
+	@Size(min=1, max=20)
 	private String semester;
 	private boolean active;
+
 	private String crn;
 
 	@ManyToMany(mappedBy = "courses")

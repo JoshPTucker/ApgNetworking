@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Add Course</title >
@@ -12,13 +12,19 @@
     <form method="post" action="#" th:action="@{/addcourse}" th:object="${course}">
         <label>Course Name</label>
         <input class="form-control" type="text" th:field="*{name}"/>
+        <span class="text-danger border border-danger rounded" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
         <label>Semester </label>
         <input class="form-control" type="text" th:field="*{semester}"/>
+        <span class="text-danger border border-danger rounded" th:if="${#fields.hasErrors('semester')}" th:errors="*{semester}"></span>
+        <label>Crn </label>
+        <input class="form-control" type="text" th:field="*{crn}"/>
+        <span class="text-danger border border-danger rounded" th:if="${#fields.hasErrors('crn')}" th:errors="*{crn}"></span>
         <button type="submit" value="submit" class="btn btn-outline-dark">submit</button>
         <button type="reset" class="btn btn-outline-dark">Reset</button>
     </form>
-    <div th:replace="base ::footer"></div>
-</div>
 
+</div>
+<div th:replace="base ::footer"></div>
 </body>
 </html>
