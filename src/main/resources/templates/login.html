@@ -2,31 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-            integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-            crossorigin="anonymous"></script>
+    <title>Login</title>
+    <th:block th:insert="base :: header"></th:block>
 </head>
 <body>
-<div th:if="${param.error}" class="text-danger border border-danger rounded">
-    Invalid username and password.
+
+<div class="container">
+    <div th:replace="base :: navlinks"></div>
+    <div th:if="${param.error}" class="text-danger border border-danger rounded">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}" class="text-success border border-success rounded">
+        You have been logged out.
+    </div>
+    <form th:action="@{/login}" method="post">
+        <div><label> User Name : <input class="form-control" type="text" name="username"/> </label></div>
+        <div><label> Password: <input class="form-control" type="password" name="password"/> </label></div>
+        <div><button type="submit" value="Sign In" class="btn btn-outline-dark">Sign In</button></div>
+        <button type="reset" class="btn btn-outline-dark">Reset</button>
+    </form>
+    <div th:replace="base ::footer"></div>
 </div>
-<div th:if="${param.logout}" class="text-success border border-success rounded">
-    You have been logged out.
-</div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input class="form-control" type="text" name="username"/> </label></div>
-    <div><label> Password: <input class="form-control" type="password" name="password"/> </label></div>
-    <div><button type="submit" value="Sign In" class="btn btn-outline-dark">Sign In</button></div>
-    <button type="reset" class="btn btn-outline-dark">Reset</button>
-</form>
+
 </body>
 </html>
