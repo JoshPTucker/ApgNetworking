@@ -1,9 +1,11 @@
 package ApgNetworking.controllers;
 
 import ApgNetworking.configurations.CloudinaryConfig;
+import ApgNetworking.models.ApgPost;
 import ApgNetworking.models.ApgUser;
 import ApgNetworking.models.Course;
 import ApgNetworking.repositories.CourseRepository;
+import ApgNetworking.repositories.PostRepository;
 import ApgNetworking.repositories.RoleRepository;
 import ApgNetworking.repositories.UserRepository;
 import ApgNetworking.services.UserService;
@@ -37,6 +39,8 @@ public class MainController {
 	CloudinaryConfig cloudc;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PostRepository postRepository;
 	@RequestMapping("/")
 	public String index() {
 		return"index";
@@ -103,5 +107,26 @@ public class MainController {
 		public String roster(Model model){
 		model.addAttribute("allCourses", courserepo.findAll());
 		return "roster";
+	}
+	@GetMapping("/makepost")
+	public String makePost(Model model){
+		model.addAttribute("post", new ApgPost());
+		return "makepost";
+	}
+	@PostMapping("/makepost")
+	public String savePost(@Valid @ModelAttribute("post") ApgPost post, BindingResult result, Model model,Authentication authentication){
+		if (result.hasErrors()) {
+			return "makepost";
+		} else {
+			post.setApguser(userRepo.findByUsername(authentication.getName()));
+			postRepository.save(post);
+			model.addAttribute("posts", postRepository.findAll());
+			return "newsfeed";
+		}
+	}
+	@RequestMapping("/newsfeed")
+	public String newsFeed(Model model){
+		model.addAttribute("posts", postRepository.findAll());
+		return "newsfeed";
 	}
 }

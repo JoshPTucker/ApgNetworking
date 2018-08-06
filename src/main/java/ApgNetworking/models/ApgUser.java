@@ -2,14 +2,7 @@ package ApgNetworking.models;
 
 import java.util.Collection;
 import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 @Entity
 public class ApgUser {
@@ -31,6 +24,9 @@ public class ApgUser {
 	private Collection<Role> roles;
 	@ManyToMany()
 	private Collection<Course> courses;
+
+	@OneToMany(mappedBy = "apguser", cascade = CascadeType.ALL)
+	public Collection<ApgPost> posts;
 	public ApgUser(){
 
 	}
@@ -121,5 +117,13 @@ public class ApgUser {
 	public void addRole(Role role)
 	{
 		this.roles.add(role);
+	}
+
+	public Collection<ApgPost> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(Collection<ApgPost> posts) {
+		this.posts = posts;
 	}
 }
